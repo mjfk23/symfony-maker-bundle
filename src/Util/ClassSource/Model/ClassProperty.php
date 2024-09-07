@@ -34,6 +34,7 @@ final class ClassProperty
         public bool $needsTypeHint = true,
         public bool $unique = false,
         public ?string $enumType = null,
+        public ?string $name = null,
     ) {
     }
 
@@ -55,6 +56,10 @@ final class ClassProperty
 
         if ($this->enumType) {
             $attributes['enumType'] = $this->enumType;
+        }
+
+        if ($this->name) {
+            $attributes['name'] = $this->name;
         }
 
         foreach (['length', 'id', 'nullable', 'precision', 'scale'] as $property) {
@@ -80,6 +85,7 @@ final class ClassProperty
                 scale: $data->scale,
                 unique: $data->unique ?? false,
                 enumType: $data->enumType,
+                name: $data->columnName
             );
         }
 
@@ -100,6 +106,7 @@ final class ClassProperty
             scale: $data['scale'] ?? null,
             unique: $data['unique'] ?? false,
             enumType: $data['enumType'] ?? null,
+            name: $data['name'] ?? null
         );
     }
 }

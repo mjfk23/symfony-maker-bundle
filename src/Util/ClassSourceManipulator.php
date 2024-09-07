@@ -97,6 +97,12 @@ final class ClassSourceManipulator
         return $this->sourceCode;
     }
 
+    public function setClassDocComment(array $commentLines): void
+    {
+        $this->getClassNode()->setDocComment(new \PhpParser\Comment\Doc($this->createDocBlock($commentLines)));
+        $this->updateSourceCodeFromNewStmts();
+    }
+
     public function addEntityField(ClassProperty $mapping): void
     {
         $typeHint = DoctrineHelper::getPropertyTypeForColumn($mapping->type);
